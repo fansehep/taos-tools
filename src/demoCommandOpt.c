@@ -524,30 +524,6 @@ int parse_args(int argc, char *argv[], SArguments *pg_args) {
                 errorUnrecognized(argv[0], argv[i]);
                 goto end_parse_command;
             }
-        } else if ((0 == strncmp(argv[i], "-s", strlen("-s"))) ||
-                   (0 ==
-                    strncmp(argv[i], "--sql-file", strlen("--sql-file")))) {
-            if (2 == strlen(argv[i])) {
-                if (argc == i + 1) {
-                    errorPrintReqArg(argv[0], "s");
-                    goto end_parse_command;
-                }
-                pg_args->sqlFile = argv[++i];
-            } else if (0 ==
-                       strncmp(argv[i], "--sql-file=", strlen("--sql-file="))) {
-                pg_args->sqlFile = (char *)(argv[i++] + strlen("--sql-file="));
-            } else if (0 == strncmp(argv[i], "-s", strlen("-s"))) {
-                pg_args->sqlFile = (char *)(argv[i++] + strlen("-s"));
-            } else if (strlen("--sql-file") == strlen(argv[i])) {
-                if (argc == i + 1) {
-                    errorPrintReqArg3(argv[0], "--sql-file");
-                    goto end_parse_command;
-                }
-                pg_args->sqlFile = argv[++i];
-            } else {
-                errorUnrecognized(argv[0], argv[i]);
-                goto end_parse_command;
-            }
         } else if ((0 == strncmp(argv[i], "-T", strlen("-T"))) ||
                    (0 == strncmp(argv[i], "--threads", strlen("--threads")))) {
             if (2 == strlen(argv[i])) {
@@ -859,10 +835,10 @@ int parse_args(int argc, char *argv[], SArguments *pg_args) {
                 pg_args->database = argv[++i];
             } else if (0 ==
                        strncmp(argv[i], "--database=", strlen("--database="))) {
-                pg_args->output_file =
+                pg_args->database =
                     (char *)(argv[i] + strlen("--database="));
             } else if (0 == strncmp(argv[i], "-d", strlen("-d"))) {
-                pg_args->output_file = (char *)(argv[i] + strlen("-d"));
+                pg_args->database = (char *)(argv[i] + strlen("-d"));
             } else if (strlen("--database") == strlen(argv[i])) {
                 if (argc == i + 1) {
                     errorPrintReqArg3(argv[0], "--database");

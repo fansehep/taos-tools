@@ -681,8 +681,8 @@ int prepareSampleData() {
                            db[i].superTbls[j].stbName,
                            db[i].superTbls[j].columnCount,
                            db[i].superTbls[j].lenOfCols);
-                if (db[i].superTbls[j].lenOfCols * g_args.reqPerReq > (1024*1024 - 256)) {
-                    errorPrint("SQL length with batch is: %u, please reduce your batch size\n", db[i].superTbls[j].lenOfCols * g_args.reqPerReq);
+                if (db[i].superTbls[j].lenOfCols * g_args.reqPerReq > (1024*1024) && g_args.iface == TAOSC_IFACE) {
+                    errorPrint("SQL length with batch is: %u, please reduce your batch size under %u\n", db[i].superTbls[j].lenOfCols * g_args.reqPerReq, 1024^1024/db[i].superTbls[j].lenOfCols);
                     return -1;
                 }
                 db[i].superTbls[j].sampleDataBuf = calloc(
