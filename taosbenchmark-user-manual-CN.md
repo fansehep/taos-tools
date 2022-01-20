@@ -20,9 +20,7 @@ taosBenchmark 是TDengine进行性能测试的工具应用程序，可以进行T
 
 -p：连接taosd服务的密码。缺省值为taosdata。
 
--I：taosBenchmark插入数据的方式，可选项为taosc, 
-
-, stmt, sml。缺省值为taosc。
+-I：taosBenchmark插入数据的方式，可选项为taosc, , stmt, sml。缺省值为taosc。
 
 -o：指定执行结果输出文件的路径。缺省值为./output.txt。
 
